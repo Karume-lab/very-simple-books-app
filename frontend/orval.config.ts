@@ -13,7 +13,7 @@ export default {
       },
       override: {
         mutator: {
-          path: "src/api/axios-instance.ts",
+          path: "src/lib/axios-instance.ts",
           name: "axiosInstanceMutator",
         },
         zod: true,
