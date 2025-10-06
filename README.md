@@ -82,8 +82,6 @@ Orval is configured to fetch the OpenAPI JSON directly from the running backend,
 cd frontend
 bun run codegen
 
-# Optional: watch for backend changes
-bun run codegen:watch
 ```
 
 > The generated types and hooks are placed in `frontend/src/__generated__/api/`.

@@ -9,8 +9,7 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "codegen": "bunx orval",
-    "codegen:watch": "orval --watch"
+    "codegen": "bunx orval"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
