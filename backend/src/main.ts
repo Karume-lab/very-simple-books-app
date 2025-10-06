@@ -9,6 +9,9 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new HumanReadableValidationPipe());
+  app.enableCors({
+    origin: 'http://localhost:5173',
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Very Simple Books API')

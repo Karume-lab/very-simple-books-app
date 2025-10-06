@@ -11,7 +11,7 @@ The goal is to understand how types, validation, and data flow seamlessly across
 
 ---
 
-## 🧩 What Tou Learn
+## 🧩 What To Learn
 
 * How to define data models once in the backend (NestJS DTOs)
 * How to automatically generate OpenAPI schemas from them
