@@ -11,18 +11,6 @@ The goal is to understand how types, validation, and data flow seamlessly across
 
 ---
 
-## 🧩 What To Learn
-
-* How to define data models once in the backend (NestJS DTOs)
-* How to automatically generate OpenAPI schemas from them
-* How to use **Orval** to create a fully typed React API client
-* How **Zod** brings runtime validation to the frontend
-* How **React Hook Form** integrates those types for safe, dynamic forms
-* How backend validation errors can be mapped directly to form fields
-* How to maintain one source of truth for all your types
-
----
-
 ## 🔄 The Type Flow
 
 ```
@@ -44,18 +32,6 @@ NestJS DTOs (class-validator)
 
 ---
 
-## 🧠 Core Concepts
-
-| Concept                    | Description                                                |
-| -------------------------- | ---------------------------------------------------------- |
-| **End-to-end type safety** | Types flow from backend → OpenAPI → frontend automatically |
-| **Runtime validation**     | Zod ensures frontend validation matches backend rules      |
-| **Zero duplication**       | DTOs define data once, everywhere else reuses them         |
-| **Better DX**              | IDE autocompletion and error hints on both ends            |
-| **Reliable UX**            | Users see backend-authored error messages inline           |
-
----
-
 ## 🪄 Stack Overview
 
 | Layer          | Tool                  | Role                          |
@@ -69,15 +45,50 @@ NestJS DTOs (class-validator)
 
 ---
 
-## 🧭 Key Takeaway
+## ⚙️ Repo Setup
 
-**very-simple-books-app** shows that you can have:
+Clone the repo and install dependencies for both backend and frontend:
 
-* One schema → many uses
-* No “drift” between backend and frontend
-* Predictable, safe API consumption
-* Validation that feels the same everywhere
+```bash
+# Clone repo
+git clone https://github.com/Karume-lab/very-simple-books-app
+cd very-simple-books-app
+
+# Backend
+cd backend
+bun install
+
+# Frontend
+cd ../frontend
+bun install
+```
 
 ---
 
-> 💬 *“Define once. Trust everywhere.”*
+## 🛠 Prerequisites
+
+- Bun >= 1.x
+- Node.js >= 20
+- Git
+
+---
+
+## 🔄 Generate Types and Hooks
+
+Orval is configured to fetch the OpenAPI JSON directly from the running backend, so you **don’t need to manually export a Swagger file**.
+
+```bash
+# Start frontend dev server and generate hooks/types
+cd frontend
+bun run codegen
+
+# Optional: watch for backend changes
+bun run codegen:watch
+```
+
+> The generated types and hooks are placed in `frontend/src/__generated__/api/`.
+> Orval will automatically fetch the latest schema from the backend URL configured in `orval.config.ts`.
+
+---
+
+> 💬 _“Define once. Trust everywhere.”_
