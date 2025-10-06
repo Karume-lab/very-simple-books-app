@@ -1,11 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import type { Request, Response } from 'express';
 import { AppModule } from './app.module';
 import { HumanReadableValidationPipe } from './common/pipes/human-readable-validation.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.setGlobalPrefix('api');
   app.useGlobalPipes(new HumanReadableValidationPipe());
 
   const config = new DocumentBuilder()
@@ -15,11 +17,17 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, document);
+
+  SwaggerModule.setup('api/docs', app, document);
+
+  app.use('/api/swagger-json', (_: Request, res: Response) => {
+    res.json(document);
+  });
 
   await app.listen(3000);
   console.log(`🚀 Server ready at http://localhost:3000`);
-  console.log(`📘 Swagger docs: http://localhost:3000/docs`);
+  console.log(`📘 Swagger UI: http://localhost:3000/api/docs`);
+  console.log(`📄 OpenAPI JSON: http://localhost:3000/api/swagger-json`);
 }
 
 void bootstrap();
