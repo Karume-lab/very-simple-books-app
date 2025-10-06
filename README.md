@@ -1,4 +1,4 @@
-# 📚 very-simple-book-app
+# 📚 very-simple-books-app
 
 > A learning project for **end-to-end type safety** using **NestJS**, **OpenAPI**, **Orval**, **React**, **Zod**, and **React Query**.
 
@@ -6,7 +6,7 @@
 
 ## 🎯 Purpose
 
-**very-simple-book-app** exists to explore how to build a fully type-safe system — where backend and frontend share the same data contracts automatically.
+**very-simple-books-app** exists to explore how to build a fully type-safe system — where backend and frontend share the same data contracts automatically.
 The goal is to understand how types, validation, and data flow seamlessly across the stack **without duplication**.
 
 ---
@@ -71,7 +71,7 @@ NestJS DTOs (class-validator)
 
 ## 🧭 Key Takeaway
 
-**very-simple-book-app** shows that you can have:
+**very-simple-books-app** shows that you can have:
 
 * One schema → many uses
 * No “drift” between backend and frontend
