@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { writeFileSync } from 'node:fs';
 import { AppModule } from '../app.module';
 
-async function generateOpenAPI() {
+async function generateSwaggerJSON() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
@@ -18,4 +18,4 @@ async function generateOpenAPI() {
   console.log('✅ OpenAPI spec exported to swagger.json');
 }
 
-void generateOpenAPI();
+void generateSwaggerJSON();
