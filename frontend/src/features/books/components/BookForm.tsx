@@ -1,14 +1,17 @@
-import { useState } from 'react';
-import type { Book, CreateBookDto } from '../../../__generated__/api/model';
+import { useState } from "react";
+import type { Book, CreateBookDto } from "../../../__generated__/api/model";
 
 interface BookFormProps {
   onSubmit: (book: CreateBookDto) => void;
   initialData?: Partial<Book>;
-};
+}
 
-export const BookForm:React.FC<BookFormProps> = ({ onSubmit, initialData = {} }) => {
-  const [title, setTitle] = useState(initialData.title || '');
-  const [author, setAuthor] = useState(initialData.author || '');
+export const BookForm: React.FC<BookFormProps> = ({
+  onSubmit,
+  initialData = {},
+}) => {
+  const [title, setTitle] = useState(initialData.title || "");
+  const [author, setAuthor] = useState(initialData.author || "");
   const [year, setYear] = useState(initialData.year || 0);
 
   const handleSubmit = (e: React.FormEvent) => {

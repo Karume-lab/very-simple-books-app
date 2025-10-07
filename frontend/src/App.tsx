@@ -1,58 +1,60 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import type {
-  Book,
-  CreateBookDto,
-  UpdateBookDto,
-} from "./__generated__/api/model";
+import {
+  getBooksControllerFindAllQueryKey,
+  useBooksControllerCreate,
+  useBooksControllerFindAll,
+  useBooksControllerRemove,
+  useBooksControllerUpdate,
+} from "./__generated__/api/books/books";
+import type { Book, CreateBookDto } from "./__generated__/api/model";
 import { Loading } from "./common/components/Loading";
 import { BookForm, BookList } from "./features/books";
-import {
-  createBook,
-  deleteBook,
-  getBooks,
-  updateBook,
-} from "./features/books/api";
 
 const App = () => {
   const queryClient = useQueryClient();
   const [editingBook, setEditingBook] = useState<Book | null>(null);
 
-  const { data: books, isLoading } = useQuery<Book[], Error>({
-    queryKey: ["books"],
-    queryFn: getBooks,
+  const { data: books, isLoading } = useBooksControllerFindAll<Book[]>();
+
+  const createMutation = useBooksControllerCreate<Book>({
+    mutation: {
+      onSuccess: () =>
+        queryClient.invalidateQueries({
+          queryKey: getBooksControllerFindAllQueryKey(),
+        }),
+    },
   });
 
-  const createMutation = useMutation<Book, Error, CreateBookDto>({
-    mutationFn: createBook,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["books"] }),
+  const updateMutation = useBooksControllerUpdate<Book>({
+    mutation: {
+      onSuccess: () =>
+        queryClient.invalidateQueries({
+          queryKey: getBooksControllerFindAllQueryKey(),
+        }),
+    },
   });
 
-  const updateMutation = useMutation<
-    Book,
-    Error,
-    { id: number; book: UpdateBookDto }
-  >({
-    mutationFn: ({ id, book }) => updateBook(id, book),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["books"] }),
-  });
-
-  const deleteMutation = useMutation<void, Error, number>({
-    mutationFn: deleteBook,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["books"] }),
+  const deleteMutation = useBooksControllerRemove<void>({
+    mutation: {
+      onSuccess: () =>
+        queryClient.invalidateQueries({
+          queryKey: getBooksControllerFindAllQueryKey(),
+        }),
+    },
   });
 
   const handleSubmit = (book: CreateBookDto) => {
     if (editingBook) {
-      updateMutation.mutate({ id: editingBook.id, book });
+      updateMutation.mutate({ id: editingBook.id, data: book });
       setEditingBook(null);
     } else {
-      createMutation.mutate(book);
+      createMutation.mutate({ data: book });
     }
   };
 
   const handleEdit = (book: Book) => setEditingBook(book);
-  const handleDelete = (id: number) => deleteMutation.mutate(id);
+  const handleDelete = (id: number) => deleteMutation.mutate({ id });
 
   if (isLoading) return <Loading />;
 
@@ -64,7 +66,11 @@ const App = () => {
         initialData={editingBook ?? undefined}
       />
       <div className="mt-4">
-        <BookList books={books} onEdit={handleEdit} onDelete={handleDelete} />
+        <BookList
+          books={books ?? []}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
       </div>
     </div>
   );
