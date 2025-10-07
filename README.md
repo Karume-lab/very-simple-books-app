@@ -56,18 +56,17 @@ cd very-simple-books-app
 
 # Backend
 cd backend
-bun install
+pnpm install
 
 # Frontend
 cd ../frontend
-bun install
+pnpm install
 ```
 
 ---
 
 ## 🛠 Prerequisites
 
-- Bun >= 1.x
 - Node.js >= 20
 - Git
 
@@ -80,7 +79,7 @@ Orval is configured to fetch the OpenAPI JSON directly from the running backend,
 ```bash
 # Start frontend dev server and generate hooks/types
 cd frontend
-bun run codegen
+pnpm run codegen
 
 ```
 
