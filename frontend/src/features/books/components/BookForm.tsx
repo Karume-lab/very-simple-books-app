@@ -1,6 +1,11 @@
 import { useState } from "react";
 import type { Book, CreateBookDto } from "../../../__generated__/api/model";
 
+/* TODO:
+toasts
+form validation with zod and react hook form
+*/
+
 interface BookFormProps {
   onSubmit: (book: CreateBookDto) => void;
   initialData?: Partial<Book>;

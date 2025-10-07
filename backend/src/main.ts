@@ -5,6 +5,10 @@ import { AppModule } from './app.module';
 import { DelayInterceptor } from './common/interceptors/delay.interceptor';
 import { HumanReadableValidationPipe } from './common/pipes/human-readable-validation.pipe';
 
+/* TODO:
+migrate to biome
+*/
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 

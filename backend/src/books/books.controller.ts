@@ -14,6 +14,10 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Book } from './entities/book.entity';
 
+/* TODO:
+add image handling for book cover
+*/
+
 @ApiTags('Books')
 @Controller('books')
 export class BooksController {

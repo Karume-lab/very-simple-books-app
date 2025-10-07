@@ -14,6 +14,13 @@ import type {
 } from "./__generated__/api/model";
 import { BookForm, BookList } from "./features/books";
 
+/* TODO:
+sketch ui and improve it (give it a more professional feel)
+add icons
+hide add new book form behind a button
+convert import paths to be absolute
+*/
+
 const App = () => {
   const queryClient = useQueryClient();
   const [editingBook, setEditingBook] = useState<Book | null>(null);

@@ -2,6 +2,13 @@ import type { Book } from "../../../__generated__/api/model";
 import { BookCard } from "./BookCard";
 import BookCardSkeleton from "./BookCardSkeleton";
 
+/* TODO:
+infinite scrolling
+sorting
+filtering
+searching
+*/
+
 interface BookListProps {
   books: Book[] | undefined;
   onEdit: (book: Book) => void;
