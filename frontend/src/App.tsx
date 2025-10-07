@@ -7,7 +7,7 @@ import {
   useBooksControllerRemove,
   useBooksControllerUpdate,
 } from "./__generated__/api/books/books";
-import type { Book, CreateBookDto } from "./__generated__/api/model";
+import type { Book, CreateBookDto, UpdateBookDto } from "./__generated__/api/model";
 import { Loading } from "./common/components/Loading";
 import { BookForm, BookList } from "./features/books";
 
@@ -17,7 +17,7 @@ const App = () => {
 
   const { data: books, isLoading } = useBooksControllerFindAll<Book[]>();
 
-  const createMutation = useBooksControllerCreate<Book>({
+  const createMutation = useBooksControllerCreate<CreateBookDto>({
     mutation: {
       onSuccess: () =>
         queryClient.invalidateQueries({
@@ -26,7 +26,7 @@ const App = () => {
     },
   });
 
-  const updateMutation = useBooksControllerUpdate<Book>({
+  const updateMutation = useBooksControllerUpdate<UpdateBookDto>({
     mutation: {
       onSuccess: () =>
         queryClient.invalidateQueries({
