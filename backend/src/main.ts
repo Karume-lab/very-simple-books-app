@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import type { Request, Response } from 'express';
 import { AppModule } from './app.module';
+import { DelayInterceptor } from './common/interceptors/delay.interceptor';
 import { HumanReadableValidationPipe } from './common/pipes/human-readable-validation.pipe';
 
 async function bootstrap() {
@@ -12,6 +13,8 @@ async function bootstrap() {
   app.enableCors({
     origin: 'http://localhost:5173',
   });
+
+  app.useGlobalInterceptors(new DelayInterceptor());
 
   const config = new DocumentBuilder()
     .setTitle('Very Simple Books API')
